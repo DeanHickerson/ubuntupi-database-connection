@@ -6,10 +6,10 @@ const mysql = require('mysql');
 // execute single connection
 
 // const connection = mysql.createConnection({
-//     host: 'ubuntupi',
-//     user: 'networkuser',
-//     password: process.env.DBPASS,
-//     database: 'ubuntupidb'
+    // host: process.env.HOST,
+    // user: process.env.USER,
+    // password: process.env.DBPASS,
+    // database: process.env.DB
 // });
 
 
@@ -30,13 +30,13 @@ const mysql = require('mysql');
 
 const pool = mysql.createPool({
     connectionLimit: 10,
-    host: 'ubuntupi',
-    user: 'networkuser',
+    host: process.env.HOST,
+    user: process.env.USER,
     password: process.env.DBPASS,
-    database: 'ubuntupidb'
+    database: process.env.DB
 });
 
-pool.query('select * from family', (error, data, fields) => {
+pool.query(`select * from ${process.env.TABLE}`, (error, data, fields) => {
     if (error) throw error;
     console.log(data);
 });
